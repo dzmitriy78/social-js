@@ -17,7 +17,8 @@ const messageReducer = (state, action) => {
         case "UPDATE-NEW-DIALOG-TEXT":
             state.newDialogText = action.newDialText;
             break;
+        default:
+            return state;
     }
-    return state;
 }
 export default messageReducer;
