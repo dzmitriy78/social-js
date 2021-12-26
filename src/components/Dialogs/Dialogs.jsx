@@ -1,8 +1,6 @@
-import React, {createRef} from "react";
+import React from "react";
 import classes from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
-import {addDialogActionCreator, onDialogChangeActionCreator} from "../../redux/message-reducer";
-
 
 const Dialog = (props) => {
     let path = "/dialogs/" + props.id;
@@ -22,20 +20,22 @@ const Message = (props) => {
 
 export function Dialogs(props) {
 
-    let dialogsElement = props.messagePage.dialogsData
+    let state = props.messagePage;
+
+    let dialogsElement = state.dialogsData
         .map(d => <Dialog avatar={d.avatar} name={d.name} id={d.id}/>);
 
-    let messageElement = props.messagePage.messageData
+    let messageElement = state.messageData
         .map(m => <Message id={m.id} message={m.message}/>);
 
 
-    let addDialog = () => {
-        props.dispatch(addDialogActionCreator());
+    let onAddDialog = () => {
+        props.addDialog();
     }
 
     let onDialogChange = (e) => {
         let dialogText = e.target.value;
-        props.dispatch(onDialogChangeActionCreator(dialogText));
+        props.onDialogChange(dialogText);
     }
 
     return (
@@ -48,11 +48,11 @@ export function Dialogs(props) {
 
                 <div>
                     <textarea onChange={onDialogChange}
-                              value={props.messagePage.newDialogText}/>
+                              value={state.newDialogText}/>
                 </div>
                 <div>
-                    <button disabled={props.messagePage.newDialogText === ""}
-                            onClick={addDialog}>Add post
+                    <button disabled={state.newDialogText === ""}
+                            onClick={onAddDialog}>Add post
                     </button>
                 </div>
             </div>

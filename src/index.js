@@ -6,17 +6,17 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 
-let rerenderTree = (state) => {
+let rerenderTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} dispatch={store.dispatch.bind(store)}/>
+            <App store={store}/>
         </BrowserRouter>, document.getElementById('root'));
 }
 
 rerenderTree(store.getState());
-store.subscribe(()=>{
-    let state = store.getState();
-    rerenderTree(state)
+store.subscribe(() => {
+        let state = store.getState();
+        rerenderTree(state)
     }
 );
 
