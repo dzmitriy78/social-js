@@ -13,7 +13,7 @@ export const MyPosts = (props) => {
 
     let onPostChange = (e) => {
         let text = e.target.value;
-        props.updatePostActionCreator(text);
+        props.onPostChange(text);
     }
 
     return (
