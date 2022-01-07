@@ -28,7 +28,8 @@ let initialState = {
             id: 6,
             name: "Gucci",
             avatar: <img
-                src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZXiLIwZ4MJ4wim5PJAEv-8pjZR6omqL6qFw&usqp=CAU"} alt={6}/>
+                src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZXiLIwZ4MJ4wim5PJAEv-8pjZR6omqL6qFw&usqp=CAU"}
+                alt={6}/>
         },
     ],
 
@@ -46,21 +47,21 @@ let initialState = {
 const messageReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case "ADD-DIALOG":{
+        case "ADD-DIALOG":
             let newDialog = {
                 id: 10,
                 message: state.newDialogText
             }
-            let copyState = {...state};
-            copyState.messageData = state.messageData;
-            copyState.messageData.push(newDialog);
-            copyState.newDialogText = "";
-            return copyState;}
-        case "UPDATE-NEW-DIALOG-TEXT": {
-            let copyState = {...state};
-            copyState.newDialogText = action.newDialText;
-            return copyState;
-        }
+            return {
+                ...state,
+                messageData: [...state.messageData, newDialog],
+                newDialogText: ""
+            }
+        case "UPDATE-NEW-DIALOG-TEXT":
+            return {
+                ...state,
+                newDialogText: action.newDialText
+            }
         default:
             return state;
     }

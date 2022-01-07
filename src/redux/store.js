@@ -1,3 +1,4 @@
+/*
 import React from "react";
 import profileReducer from "./profile-reducer";
 import messageReducer from "./message-reducer";
@@ -69,4 +70,4 @@ let store = {
     }
 }
 
-export default store;
+export default store;*/
