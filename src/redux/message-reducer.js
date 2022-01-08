@@ -1,5 +1,4 @@
 import React from "react";
-
 const addDialog = "ADD-DIALOG";
 const updateNewDialogText = "UPDATE-NEW-DIALOG-TEXT";
 export const onDialogChangeActionCreator = (dialogText) => ({type: updateNewDialogText, newDialText: dialogText});

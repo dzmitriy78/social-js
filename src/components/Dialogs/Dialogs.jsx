@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from "./Dialogs.module.css"
 import {NavLink} from "react-router-dom";
+import {Message} from "./Messages/Messages";
 
 const Dialog = (props) => {
     let path = "/dialogs/" + props.id;
@@ -12,21 +13,15 @@ const Dialog = (props) => {
     )
 }
 
-const Message = (props) => {
-    return (
-        <div className={classes.message}>{props.message}</div>
-    )
-}
-
 export function Dialogs(props) {
 
     let state = props.messagePage;
 
     let dialogsElement = state.dialogsData
-        .map(d => <Dialog key = {d.id} avatar={d.avatar} name={d.name} id={d.id}/>);
+        .map(d => <Dialog key={d.id} avatar={d.avatar} name={d.name} id={d.id}/>);
 
     let messageElement = state.messageData
-        .map(m => <Message key = {m.id} id={m.id} message={m.message}/>);
+        .map(m => <Message key={m.id} id={m.id} message={m.message}/>);
 
 
     let onAddDialog = () => {
