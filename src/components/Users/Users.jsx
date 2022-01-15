@@ -4,11 +4,14 @@ import * as axios from "axios";
 import UserPhoto from "../../assets/images/user.png"
 
 let Users = (props) => {
-    if (props.users.length === 0) {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => {
-                props.setUsers(response.data.items)
-            })}
+    const getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(response => {
+                    props.setUsers(response.data.items)
+                })
+        }
+    }
                         /* {
                              id: 1,
                              avatar: "https://author.today/content/2020/02/27/6b61e91ea7f64ddb975f57fa36a38814.jpg",
@@ -35,6 +38,7 @@ let Users = (props) => {
                          }*/
 
     return (<div>
+        <button onClick={getUsers}>get Users</button>
         {
             props.users.map(u => <div key={u.id}>
                 <span>
