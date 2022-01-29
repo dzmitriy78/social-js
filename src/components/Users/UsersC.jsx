@@ -5,40 +5,34 @@ import UserPhoto from "../../assets/images/user.png"
 
 class UsersC extends React.Component {
 
+
     componentDidMount() {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.setUsersTotalCount(response.data.totalCount)
+            })
+    }
+    onPageChanged = (numberPage)=>{
+        this.props.setCurrentPage(numberPage)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${numberPage}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
             })
     }
 
-    /* {
-         id: 1,
-         avatar: "https://author.today/content/2020/02/27/6b61e91ea7f64ddb975f57fa36a38814.jpg",
-         followed: true,
-         fullName: "Dzmitriy",
-         status: "Boss",
-         location: {city: "Baranovichi", country: "Belarus"}
-     },
-     {
-         id: 2,
-         avatar: "https://cspromogame.ru//storage/upload_images/avatars/1299.jpg",
-         followed: true,
-         fullName: "Yarik",
-         status: "Admin",
-         location: {city: "Baranovichi", country: "Belarus"}
-     },
-     {
-         id: 3,
-         avatar: "https://i.imgur.com/mDcyZHZ.png",
-         followed: false,
-         fullName: "Anyuta",
-         status: "User",
-         location: {city: "Minsk", country: "Belarus"},
-     }*/
     render() {
-
-        return (<div>
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
+        return <div>
+            <div>
+                {pages.map(p => {
+                    return <span onClick={() => {this.onPageChanged(p)}} className={this.props.currentPage === p && styles.selectedPage}>{p}</span>
+                })}
+            </div>
             {
                 this.props.users.map(u => <div key={u.id}>
                 <span>
@@ -65,7 +59,8 @@ class UsersC extends React.Component {
                 </span>
                 </div>)
             }
-        </div>)
+        </div>
     }
 }
+
 export default UsersC;
