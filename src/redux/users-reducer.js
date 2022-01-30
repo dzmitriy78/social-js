@@ -1,15 +1,9 @@
-const follow = "FOLLOW";
-const unFollow = "UNFOLLOW";
-const setUsers = "SET_USERS";
-const setCurrentPage = "SET_CURRENT_PAGE";
-const setUsersTotalCount = "SET_USERS_TOTAL_COUNT";
-const toggleIsFetching = "TOGGLE_IS_FETCHING";
-export const followAC = (userID) => ({type: follow, userID});
-export const unFollowAC = (userID) => ({type: unFollow, userID});
-export const setUsersAC = (users) => ({type: setUsers, users});
-export const setCurrentPageAC = (currentPage) => ({type: setCurrentPage, currentPage});
-export const setUsersTotalCountAC = (totalUsersCount) => ({type: setUsersTotalCount, totalUsersCount})
-export const toggleIsFetchingAC = (isFetching) => ({type: toggleIsFetching, isFetching});
+export const follow = (userID) => ({type: "FOLLOW", userID});
+export const unFollow = (userID) => ({type: "UNFOLLOW", userID});
+export const setUsers = (users) => ({type: "SET_USERS", users});
+export const setCurrentPage = (currentPage) => ({type: "SET_CURRENT_PAGE", currentPage});
+export const setUsersTotalCount = (totalUsersCount) => ({type: "SET_USERS_TOTAL_COUNT", totalUsersCount})
+export const toggleIsFetching = (isFetching) => ({type: "TOGGLE_IS_FETCHING", isFetching});
 
 let initialState = {
     users: [],
