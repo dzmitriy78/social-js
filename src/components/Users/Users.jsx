@@ -12,7 +12,7 @@ let Users = (props)=> {
     return <div>
         <div>
             {pages.map(p => {
-                return <span onClick={() => {props.onPageChanged(p)}} className={props.currentPage === p && styles.selectedPage}>{p}</span>
+                return <span key={p.id} onClick={() => {props.onPageChanged(p)}} className={props.currentPage === p? styles.selectedPage: ""}>{p}</span>
             })}
         </div>
         {
@@ -45,4 +45,4 @@ let Users = (props)=> {
         }
     </div>
 }
-export default Users
+export default Users;
