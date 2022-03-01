@@ -10,7 +10,7 @@ import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 
-export class UsersContainerC extends React.Component {
+class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
@@ -49,11 +49,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
     following,
     unfollowing,
     setCurrentPage,
     setUsersTotalCount,
     getUsers
-})(UsersContainerC)
-export default UsersContainerC;
+})(UsersContainer)

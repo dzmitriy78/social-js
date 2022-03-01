@@ -10,7 +10,7 @@ let Users = (props) => {
         pages.push(i);
     }
     return <div>
-        <div>
+        <div className={styles.pages}>
             {pages.map(p => {
                 return <span key={p.toString()} onClick={() => {
                     props.onPageChanged(p)
