@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "./Dialogs.module.css"
-import {NavLink} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import {Message} from "./Messages/Messages";
 
 const Dialog = (props) => {
@@ -32,6 +32,8 @@ export function Dialogs(props) {
         let dialogText = e.target.value;
         props.onDialogChange(dialogText);
     }
+
+    if (!props.isAuth) return <Navigate replace to = "/login"/>
 
     return (
         <div className={classes.dialogs}>

@@ -21,8 +21,7 @@ const authReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const authMe = () => {
-    return (dispatch) => {
+export const authMe = () => (dispatch) => {
         myAPI.authMe()
             .then(data => {
                 if (data.resultCode === 0) {
@@ -30,7 +29,6 @@ export const authMe = () => {
                     dispatch(setAuthUserData(id, email, login))
                 }
             })
-    }
 }
 
 export default authReducer;
