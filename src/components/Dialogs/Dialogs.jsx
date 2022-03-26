@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "./Dialogs.module.css"
-import {Navigate, NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {Message} from "./Messages/Messages";
 
 const Dialog = (props) => {
@@ -33,7 +33,7 @@ export function Dialogs(props) {
         props.onDialogChange(dialogText);
     }
 
-    if (!props.isAuth) return <Navigate replace to = "/login"/>
+/*    if (!props.isAuth) return <Navigate replace to = "/login"/>*/
 
     return (
         <div className={classes.dialogs}>
