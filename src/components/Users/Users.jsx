@@ -10,13 +10,7 @@ let Users = (props) => {
         pages.push(i);
     }
     return <div>
-        <div className={styles.pages}>
-            {pages.map(p => {
-                return <span key={p.toString()} onClick={() => {
-                    props.onPageChanged(p)
-                }} className={props.currentPage === p ? styles.selectedPage : ""}>{p}</span>
-            })}
-        </div>
+
         {
             props.users.map(u => <div key={u.id}>
                 <span>
@@ -26,7 +20,7 @@ let Users = (props) => {
                              alt={""}/>
                           </NavLink>
                       </div>
-                      <div>
+                      <div className={styles.follow}>
                         {u.followed ?
                             <button disabled={props.followingInProgress
                                 .some(id => id === u.id)} onClick={() => {
@@ -39,16 +33,23 @@ let Users = (props) => {
                             }}>Follow</button>}
                       </div>
                 </span>
-                <span>
-                    <div>{u.name}</div>
-                    <div>{u.status}</div>
+                <span >
+                    <div className={styles.usersName}>{u.name}</div>
+                    <div className={styles.usersDescr}>{u.status}</div>
                 </span>
                 <span>
-                    <div>{"u.location.city"}</div>
-                    <div>{"u.location.country"}</div>
+                    <div className={styles.usersDescr}>{"u.location.city"}</div>
+                    <div className={styles.usersDescr}>{"u.location.country"}</div>
                 </span>
             </div>)
         }
+        <div className={styles.pageWrapper}>
+            {pages.map(p => {
+                return <span key={p} onClick={() => {
+                    props.onPageChanged(p)
+                }} className={props.currentPage === p ? styles.selectedPage : styles.page}>{p}</span>
+            })}
+        </div>
     </div>
 }
 export default Users;

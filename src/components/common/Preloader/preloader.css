@@ -1,6 +1,10 @@
+.preloader {
+    margin: 0 auto;
+}
+
 .ball {
     background-color: rgba(0, 0, 0, 0);
-    border: 5px solid rgba(0, 183, 229, 0.9);
+    border: 5px solid rgba(151, 195, 206, 0.9);
     opacity: .9;
     border-top: 5px solid rgba(0, 0, 0, 0);
     border-left: 5px solid rgba(0, 0, 0, 0);
@@ -15,7 +19,7 @@
 
 .ball1 {
     background-color: rgba(0, 0, 0, 0);
-    border: 5px solid rgba(0, 183, 229, 0.9);
+    border: 5px solid rgba(145, 201, 215, 0.9);
     opacity: .9;
     border-top: 5px solid rgba(0, 0, 0, 0);
     border-left: 5px solid rgba(0, 0, 0, 0);
