@@ -5,11 +5,13 @@ import {connect} from "react-redux";
 import {useMatch} from "react-router-dom";
 import {compose} from "redux";
 
-const ProfileURLMatch = (Component) => {
-    return (props) => {
+export const ProfileURLMatch = (Component) => {
+    let RouterComponent;
+    RouterComponent = (props) => {
         const match = useMatch('/profile/:userId/');
         return <Component {...props} match={match}/>;
-    }
+    };
+    return RouterComponent
 }
 
 class ProfileContainer extends React.Component {
