@@ -12,7 +12,7 @@ let Users = (props) => {
     return <div>
 
         {
-            props.users.map(u => <div key={u.id}>
+            props.users.map((u, i) => <div key={i}>
                 <span>
                       <div>
                           <NavLink to={"/profile/" + u.id}>
