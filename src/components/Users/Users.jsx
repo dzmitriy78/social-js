@@ -17,7 +17,7 @@ let Users = (props) => {
                       <div>
                           <NavLink to={"/profile/" + u.id}>
                         <img src={u.photos.small != null ? u.photos.small : UserPhoto} className={styles.userAvatar}
-                             alt={""}/>
+                             alt={"photo"}/>
                           </NavLink>
                       </div>
                       <div className={styles.follow}>
@@ -33,7 +33,7 @@ let Users = (props) => {
                             }}>Follow</button>}
                       </div>
                 </span>
-                <span >
+                <span>
                     <div className={styles.usersName}>{u.name}</div>
                     <div className={styles.usersDescr}>{u.status}</div>
                 </span>

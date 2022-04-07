@@ -19,7 +19,7 @@ export const ProfileInfo = (props) => {
                 <img
                     src={props.profile.photos.small} alt={"photo"}/>
             </span>
-            <ProfileStatus status={"Hi, my friends"}/>
+            <ProfileStatus status={props.status}/>
             <div className={classes.description}>
                 <h4>  {"Name:" + " " + props.profile.fullName}</h4>
             </div>
