@@ -17,11 +17,12 @@ export const ProfileInfo = (props) => {
 
             <span className={classes.description}>
                 <img
-                    src={props.profile.photos.small} alt={"photo"}/>
+                    src={props.profile.photos.small} alt={"no photo"}/>
             </span>
-            <ProfileStatus status={props.status}/>
+            <ProfileStatus status={props.status}
+                           updateStatus = {props.updateStatus}/>
             <div className={classes.description}>
-                <h4>  {"Name:" + " " + props.profile.fullName}</h4>
+                <h3>  {"Name:" + " " + props.profile.fullName}</h3>
             </div>
             <div className={classes.description}>
                 {"contacts:" + " " + props.profile.contacts.vk}

@@ -70,7 +70,7 @@ export const updateStatus = (status) => {
         profileAPI.updateStatus(status)
             .then(({data}) => {
                 if (data.resultCode === 0) {
-                    dispatch(setStatus(data));
+                    dispatch(setStatus(status));
                 }
             });
     }
