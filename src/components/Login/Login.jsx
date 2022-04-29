@@ -5,8 +5,12 @@ import loginFormSchema from "../FormValidation/LoginFormSchema";
 const Login = () => (
     <div>
         <h1>Login</h1>
-        <Formik
-            initialValues={{email: "", password: "", rememberMe: false}}
+        {<Formik
+            initialValues={{
+                email: "",
+                password: "",
+                rememberMe: false
+            }}
             validate={values => {
                 const errors = {};
                 if (!values.email) {
@@ -18,8 +22,9 @@ const Login = () => (
                 }
                 return errors;
             }}
-            onSubmit={(values) => {
-                console.log(values)
+            onSubmit={async (values) => {
+                await new Promise((r) => setTimeout(r, 500));
+                alert(JSON.stringify(values, null, 2));
             }}
             validationSchema={loginFormSchema}>
             {() => (
@@ -42,8 +47,7 @@ const Login = () => (
                     <button type={'submit'}>Log in</button>
                 </Form>
             )}
-        </Formik>
+        </Formik>}
     </div>
-    )
-
+)
 export default Login;
