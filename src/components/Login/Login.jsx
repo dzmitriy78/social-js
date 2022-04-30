@@ -32,18 +32,15 @@ const Login = () => (
                     <div>
                         <Field type={'text'} name={'email'} placeholder={'e-mail'}/>
                     </div>
-                    <ErrorMessage name="email" component="div"/>
-
+                    <ErrorMessage style={{color: "red"}} name={"email"} component={"div"}/>
                     <div>
                         <Field type={'password'} name={'password'} placeholder={'password'}/>
                     </div>
-                    <ErrorMessage name="password" component="div"/>
-
+                    <ErrorMessage style={{color: "red"}} name={"password"} component={"div"}/>
                     <div>
                         <Field type={'checkbox'} name={'rememberMe'}/>
                         <label htmlFor={'rememberMe'}> remember me </label>
                     </div>
-
                     <button type={'submit'}>Log in</button>
                 </Form>
             )}
