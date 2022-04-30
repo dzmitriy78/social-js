@@ -5,8 +5,7 @@ import PostForm from "../../Form/PostForm";
 
 export const MyPosts = (props) => {
     let addMyPost = (values) => {
-        props.onPostChange(values.text)
-        props.addPost()
+        props.addPost(values.text)
     }
     let postElement = props.postData
         .map((p, i) =>
@@ -17,7 +16,7 @@ export const MyPosts = (props) => {
         <div className={classes.postsBlock}>
             <h3>My posts</h3>
             <PostForm callback={addMyPost}
-                      text={props.newPostText}/>
+            />
             <div className={classes.posts}>
                 {postElement}
             </div>

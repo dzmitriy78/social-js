@@ -15,8 +15,7 @@ export function Dialogs(props) {
         .map((m, i) => <Message key={i} id={m.id} message={m.message}/>);
 
     let onAddDialog = (values) => {
-        props.onDialogChange(values.text);
-        props.addDialog();
+        props.addDialog(values.text)
     }
 
     /*    if (!props.isAuth) return <Navigate replace to = "/login"/>*/
@@ -28,8 +27,7 @@ export function Dialogs(props) {
             </div>
             <div className={classes.messages}>
                 {messageElement}
-                <PostForm callback={onAddDialog}
-                          text={state.newDialogText}/>
+                <PostForm callback={onAddDialog}/>
             </div>
         </div>
     )

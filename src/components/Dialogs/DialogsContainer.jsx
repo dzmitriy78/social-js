@@ -1,4 +1,4 @@
-import {addDialogActionCreator, onDialogChangeActionCreator} from "../../redux/message-reducer";
+import {addDialogActionCreator} from "../../redux/message-reducer";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -6,17 +6,14 @@ import {compose} from "redux";
 
 let mapStateToProps = (state) => {
     return {
-        messagePage: state.messagePage,
+        messagePage: state.messagePage
     }
 }
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        addDialog: () => {
-            dispatch(addDialogActionCreator())
-        },
-        onDialogChange: (dialogText) => {
-            dispatch(onDialogChangeActionCreator(dialogText))
+        addDialog: (dialogText) => {
+            dispatch(addDialogActionCreator(dialogText))
         }
     }
 }

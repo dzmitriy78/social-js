@@ -8,7 +8,7 @@ const PostForm = (props) => {
         <div>
             {<Formik
                 initialValues={{
-                    text: props.text
+                    text: ""
                 }}
                 validate={values => {
                     const errors = {};
