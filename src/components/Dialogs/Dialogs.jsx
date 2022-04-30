@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from "./Dialogs.module.css"
 import {Message} from "./Messages/Messages";
-import {ErrorMessage, Field, Form, Formik} from "formik";
 import {Dialog} from "./Dialog/Dialog";
+import PostForm from "../Form/PostForm";
 
 export function Dialogs(props) {
 
@@ -15,8 +15,7 @@ export function Dialogs(props) {
         .map((m, i) => <Message key={i} id={m.id} message={m.message}/>);
 
     let onAddDialog = (values) => {
-        let dialogText = values.newDialogText;
-        props.onDialogChange(dialogText);
+        props.onDialogChange(values.text);
         props.addDialog();
     }
 
@@ -29,43 +28,8 @@ export function Dialogs(props) {
             </div>
             <div className={classes.messages}>
                 {messageElement}
-                {<Formik
-                    initialValues={{
-                        newDialogText: state.newDialogText
-                    }}
-                    validate={values => {
-                        const errors = {};
-                        if (!values.newDialogText) {
-                            errors.newDialogText = "Enter your message text";
-                        }
-                        return errors;
-                    }}
-                    onSubmit={(values, {resetForm}) => {
-                        onAddDialog(values)
-                        resetForm({values: ""})
-                    }}
-                >
-                    {() => (
-                        <Form>
-                            <div>
-                                <Field component={"textarea"}
-                                       name={"newDialogText"}
-                                       placeholder={"Enter a message"}/>
-                            </div>
-                            <ErrorMessage className={classes.error} name="newDialogText" component="div"/>
-                            <button type={"submit"}>Add message</button>
-                        </Form>
-                    )}
-                </Formik>}
-                {/*<div>
-                    <textarea onChange={onDialogChange}
-                              value={state.newDialogText}/>
-                </div>
-                <div>
-                    <button disabled={state.newDialogText === ""}
-                            onClick={onAddDialog}>Add post
-                    </button>
-                </div>*/}
+                <PostForm callback={onAddDialog}
+                          text={state.newDialogText}/>
             </div>
         </div>
     )
