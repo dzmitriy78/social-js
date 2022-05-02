@@ -1,6 +1,7 @@
 import React from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import classes from "../Profile/MyPosts/MyPosts.module.css";
+import {postFormSchema} from "../FormValidation/formSchema";
 
 const PostForm = (props) => {
 
@@ -21,6 +22,7 @@ const PostForm = (props) => {
                     props.callback(values)
                     resetForm({values: ""})
                 }}
+                validationSchema={postFormSchema}
             >
                 {() => (
                     <Form>

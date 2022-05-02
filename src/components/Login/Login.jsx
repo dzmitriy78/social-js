@@ -1,9 +1,15 @@
 import React from 'react';
-import {Formik, Form, Field, ErrorMessage} from "formik";
-import loginFormSchema from "../FormValidation/LoginFormSchema";
+import {ErrorMessage, Field, Form, Formik} from "formik";
+import {loginFormSchema} from "../FormValidation/formSchema";
+import {login} from "../../redux/auth-reducer";
+import {connect} from "react-redux";
+import {Navigate} from "react-router-dom";
 
-const Login = () => (
-    <div>
+const Login = (props) => {
+    if (props.isAuth) {
+        return <Navigate replace to="/profile"/>
+    }
+    return <div>
         <h1>Login</h1>
         {<Formik
             initialValues={{
@@ -22,9 +28,8 @@ const Login = () => (
                 }
                 return errors;
             }}
-            onSubmit={async (values) => {
-                await new Promise((r) => setTimeout(r, 500));
-                alert(JSON.stringify(values, null, 2));
+            onSubmit={(values) => {
+                props.login(values.email, values.password, values.rememberMe)
             }}
             validationSchema={loginFormSchema}>
             {() => (
@@ -45,6 +50,13 @@ const Login = () => (
                 </Form>
             )}
         </Formik>}
+
     </div>
-)
-export default Login;
+}
+
+const mapStateToProps = (state) => ({
+    isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, {login})(Login);
+

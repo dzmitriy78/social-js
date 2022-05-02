@@ -95,13 +95,11 @@ export const following = (userId) => {
 }
 export const unfollowing = (userId) => {
     return (dispatch) => {
-        dispatch(toggleFollowingInProgress(true, userId))
         usersAPI.unfollowUser(userId)
             .then(data => {
                     if (data.resultCode === 0) {
                         dispatch(unFollow(userId))
                     }
-                    dispatch(toggleFollowingInProgress(false, userId))
                 }
             )
     }
