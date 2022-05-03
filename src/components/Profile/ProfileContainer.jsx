@@ -4,6 +4,7 @@ import {getProfile, getStatus, updateStatus} from "../../redux/profile-reducer";
 import {connect} from "react-redux";
 import {useMatch} from "react-router-dom";
 import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export const ProfileURLMatch = (Component) => {
     let RouterComponent;
@@ -17,7 +18,9 @@ export const ProfileURLMatch = (Component) => {
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-        let userId = this.props.match ? this.props.match.params.userId : /*"My id"*/ 7384;
+        let userId = this.props.match
+            ? this.props.match.params.userId
+            : this.props.meId;
         this.props.getProfile(userId)
         this.props.getStatus(userId)
     }
@@ -27,7 +30,7 @@ class ProfileContainer extends React.Component {
             <Profile {...this.props}
                      profile={this.props.profile}
                      status={this.props.status}
-                     updateStatus = {this.props.updateStatus}
+                     updateStatus={this.props.updateStatus}
             />
         )
     }
@@ -35,12 +38,14 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        meId: state.auth.userId,
+        isAuth: state.auth.isAuth
     }
 )
 
 export default compose(
     connect(mapStateToProps, {getProfile, getStatus, updateStatus}),
     ProfileURLMatch,
-    /* withAuthRedirect*/)
+    withAuthRedirect)
 (ProfileContainer)

@@ -28,11 +28,11 @@ const Login = (props) => {
                 }
                 return errors;
             }}
-            onSubmit={(values) => {
-                props.login(values.email, values.password, values.rememberMe)
+            onSubmit={(values, {setStatus}) => {
+                props.login(values.email, values.password, values.rememberMe, setStatus)
             }}
             validationSchema={loginFormSchema}>
-            {() => (
+            {({status}) => (
                 <Form>
                     <div>
                         <Field type={'text'} name={'email'} placeholder={'e-mail'}/>
@@ -46,6 +46,7 @@ const Login = (props) => {
                         <Field type={'checkbox'} name={'rememberMe'}/>
                         <label htmlFor={'rememberMe'}> remember me </label>
                     </div>
+                    <div style={{color: "red"}}>{status}</div>
                     <button type={'submit'}>Log in</button>
                 </Form>
             )}
