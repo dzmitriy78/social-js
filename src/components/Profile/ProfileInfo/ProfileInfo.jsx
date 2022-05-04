@@ -1,18 +1,15 @@
 import React from "react";
 import classes from "./ProfileInfo.module.css"
-import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatus from "./ProfileStatus";
 
 export const ProfileInfo = (props) => {
 
-    if (!props.profile) {
-        return <Preloader/>
-    }
     return (
         <div className={classes.profileInfo}>
-            {  <div>
+            {<div>
                 <img
-                    src="https://cdn-prod.medicalnewstoday.com/content/images/articles/325/325466/man-walking-dog.jpg" alt={"profileImg"}/>
+                    src="https://cdn-prod.medicalnewstoday.com/content/images/articles/325/325466/man-walking-dog.jpg"
+                    alt={"profileImg"}/>
             </div>}
 
             <span className={classes.description}>
@@ -20,7 +17,7 @@ export const ProfileInfo = (props) => {
                     src={props.profile.photos.small} alt={"no photo"}/>
             </span>
             <ProfileStatus status={props.status}
-                           updateStatus = {props.updateStatus}/>
+                           updateStatus={props.updateStatus}/>
             <div className={classes.description}>
                 <h3>  {"Name:" + " " + props.profile.fullName}</h3>
             </div>

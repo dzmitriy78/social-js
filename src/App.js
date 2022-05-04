@@ -11,13 +11,13 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
-import {initializeAPP} from "./redux/app-reducer";
+import {initializeApp} from "./redux/app-reducer";
 
 
 const App = (props) => {
 
     useEffect(() => {
-        props.initializeAPP()
+        props.initializeApp()
     }, [])
     if (!props.initialized) {
         return <div style={{fontSize: "100px", color: "red"}}>Инициализация</div>
@@ -45,4 +45,4 @@ const mapStateToProps = (state) => ({
     initialized: state.app.initialized
 })
 
-export default connect(mapStateToProps, {initializeAPP})(App);
+export default connect(mapStateToProps, {initializeApp})(App);

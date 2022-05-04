@@ -17,7 +17,7 @@ const appReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const initializeAPP = () => (dispatch) => {
+export const initializeApp = () => (dispatch) => {
     let promise = dispatch(authMe())
     Promise.all([promise])
         .then(() => {
