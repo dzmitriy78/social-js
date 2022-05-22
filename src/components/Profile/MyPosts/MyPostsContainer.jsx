@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
     return {
-        postData: state.profilePage.postData
+        postData: state.profilePage.postData,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch) => {

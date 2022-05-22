@@ -20,14 +20,14 @@ let Users = (props) => {
                              alt={"photo"}/>
                           </NavLink>
                       </div>
-                      <div className={styles.follow}>
+                    <div className={styles.follow}>
                         {u.followed ?
-                            <button disabled={props.followingInProgress
+                            <button disabled={!props.isAuth || props.followingInProgress
                                 .some(id => id === u.id)} onClick={() => {
                                 props.unfollowing(u.id)
                             }}>Unfollow</button>
 
-                            : <button disabled={props.followingInProgress
+                            : <button disabled={!props.isAuth || props.followingInProgress
                                 .some(id => id === u.id)} onClick={() => {
                                 props.following(u.id)
                             }}>Follow</button>}

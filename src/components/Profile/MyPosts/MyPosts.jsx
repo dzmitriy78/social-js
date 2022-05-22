@@ -12,14 +12,17 @@ export const MyPosts = (props) => {
             <Post key={i} id={p.id}
                   message={p.message}
                   likes={p.likeCount}/>)
-    return (
-        <div className={classes.postsBlock}>
-            <h3>My posts</h3>
-            <PostForm callback={addMyPost}
-            />
-            <div className={classes.posts}>
-                {postElement}
+    if (props.isAuth) {
+        return (
+            <div className={classes.postsBlock}>
+                <h3>My posts</h3>
+                <PostForm callback={addMyPost}
+                />
+                <div className={classes.posts}>
+                    {postElement}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
+    return <div></div>
 }
