@@ -12,6 +12,7 @@ import UsersContainer from "./components/Users/UsersContainer";
 import Login from "./components/Login/Login";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
+import {ProgressBarDemo} from "./components/common/Preloader/ProgressBar";
 
 
 const App = (props) => {
@@ -20,7 +21,8 @@ const App = (props) => {
         props.initializeApp()
     }, [])
     if (!props.initialized) {
-        return <div style={{fontSize: "100px", color: "red"}}>Инициализация</div>
+        return (/*<div style={{fontSize: "100px", color: "red"}}>Инициализация</div>*/
+        <ProgressBarDemo />)
     }
     return (
         <div className='app-wrapper'>
