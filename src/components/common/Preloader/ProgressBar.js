@@ -6,11 +6,9 @@ import 'primereact/resources/primereact.css';
 
 export const ProgressBarDemo = () => {
 
-    return (
-        <div>
-            <div className="card">
-                <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
-            </div>
+    return <div>
+        <div className="card">
+            <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>
         </div>
-    );
+    </div>
 }

@@ -4,6 +4,7 @@ const addPost = "ADD-POST";
 export const addPostActionCreator = (text) => ({type: addPost, newText: text});
 export const setUserProfile = (profile) => ({type: "SET_USER_PROFILE", profile})
 export const setStatus = (status) => ({type: "SET_STATUS", status})
+export const deletePost =(id) => ({type: "DELETE-POST", id});
 
 let initialState = {
     postData: [
@@ -35,6 +36,10 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state, status: action.status
             }
+        case "DELETE-POST":
+            return  {...state,
+            postData: state.postData.filter(p => p.id !== action.id ? p : "")
+        }
         default:
             return state;
     }

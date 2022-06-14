@@ -21,8 +21,12 @@ const App = (props) => {
         props.initializeApp()
     }, [])
     if (!props.initialized) {
-        return (/*<div style={{fontSize: "100px", color: "red"}}>Инициализация</div>*/
-        <ProgressBarDemo />)
+        return <>
+            <div className={"initial"}>
+                Инициализация
+            </div>
+            <ProgressBarDemo/>
+        </>
     }
     return (
         <div className='app-wrapper'>
