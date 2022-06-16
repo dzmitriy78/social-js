@@ -3,8 +3,18 @@ import UserPhoto from "../../assets/images/user.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
 
-let Users = (props) => {
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+let Users = ({
+                 users,
+                 isAuth,
+                 currentPage,
+                 following,
+                 followingInProgress,
+                 onPageChanged,
+                 pageSize,
+                 totalUsersCount,
+                 unfollowing
+             }) => {
+    let pagesCount = Math.ceil(totalUsersCount / pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
@@ -12,7 +22,7 @@ let Users = (props) => {
     return <div className={styles.usersRoot}>
 
         {
-            props.users.map((u, i) => <div key={i}>
+            users.map((u, i) => <div key={i}>
                 <span>
                       <div>
                           <NavLink to={"/profile/" + u.id}>
@@ -22,14 +32,14 @@ let Users = (props) => {
                       </div>
                     <div className={styles.follow}>
                         {u.followed ?
-                            <button disabled={!props.isAuth || props.followingInProgress
+                            <button disabled={!isAuth || followingInProgress
                                 .some(id => id === u.id)} onClick={() => {
-                                props.unfollowing(u.id)
+                                unfollowing(u.id)
                             }}>Unfollow</button>
 
-                            : <button disabled={!props.isAuth || props.followingInProgress
+                            : <button disabled={!isAuth || followingInProgress
                                 .some(id => id === u.id)} onClick={() => {
-                                props.following(u.id)
+                                following(u.id)
                             }}>Follow</button>}
                       </div>
                 </span>
@@ -46,8 +56,8 @@ let Users = (props) => {
         <div className={styles.pageWrapper}>
             {pages.map(p => {
                 return <span key={p} onClick={() => {
-                    props.onPageChanged(p)
-                }} className={props.currentPage === p ? styles.selectedPage : styles.page}>{p}</span>
+                    onPageChanged(p)
+                }} className={currentPage === p ? styles.selectedPage : styles.page}>{p}</span>
             })}
         </div>
     </div>

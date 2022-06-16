@@ -5,8 +5,8 @@ import {login} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {Navigate} from "react-router-dom";
 
-const Login = (props) => {
-    if (props.isAuth) {
+const Login = ({isAuth,login}) => {
+    if (isAuth) {
         return <Navigate replace to="/profile"/>
     }
     return <div>
@@ -29,7 +29,7 @@ const Login = (props) => {
                 return errors;
             }}
             onSubmit={(values, {setStatus}) => {
-                props.login(values.email, values.password, values.rememberMe, setStatus)
+                login(values.email, values.password, values.rememberMe, setStatus)
             }}
             validationSchema={loginFormSchema}>
             {({status}) => (

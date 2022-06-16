@@ -16,11 +16,13 @@ import {ProgressBarDemo} from "../common/Preloader/ProgressBar";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize)
     }
 
     onPageChanged = (numberPage) => {
-        this.props.getUsers(numberPage, this.props.pageSize)
+        const pageSize = this.props
+        this.props.getUsers(numberPage, pageSize)
         this.props.setCurrentPage(numberPage);
     }
 

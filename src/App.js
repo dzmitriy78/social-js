@@ -15,12 +15,12 @@ import {initializeApp} from "./redux/app-reducer";
 import {ProgressBarDemo} from "./components/common/Preloader/ProgressBar";
 
 
-const App = (props) => {
+const App = ({initializeApp, initialized}) => {
 
     useEffect(() => {
-        props.initializeApp()
+        initializeApp()
     }, [])
-    if (!props.initialized) {
+    if (!initialized) {
         return <>
             <div className={"initial"}>
                 Инициализация

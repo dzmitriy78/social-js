@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./ProfileInfo.module.css"
 import ProfileStatus from "./ProfileStatus";
 
-export const ProfileInfo = (props) => {
+export const ProfileInfo = ({profile, status, updateStatus}) => {
 
     return (
         <div className={classes.profileInfo}>
@@ -14,18 +14,18 @@ export const ProfileInfo = (props) => {
 
             <span className={classes.description}>
                 <img
-                    src={props.profile.photos.small} alt={"no photo"}/>
+                    src={profile.photos.small} alt={"no photo"}/>
             </span>
-            <ProfileStatus status={props.status}
-                           updateStatus={props.updateStatus}/>
+            <ProfileStatus status={status}
+                           updateStatus={updateStatus}/>
             <div className={classes.description}>
-                <h3>  {"Name:" + " " + props.profile.fullName}</h3>
+                <h3>  {"Name:" + " " + profile.fullName}</h3>
             </div>
             <div className={classes.description}>
-                {"contacts:" + " " + props.profile.contacts.vk}
+                {"contacts:" + " " + profile.contacts.vk}
             </div>
             <div className={classes.description}>
-                {"aboutMe:" + " " + props.profile.aboutMe}
+                {"aboutMe:" + " " + profile.aboutMe}
             </div>
         </div>
     )

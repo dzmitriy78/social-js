@@ -1,7 +1,7 @@
 import React from "react";
 
-const addDialog = "ADD-DIALOG";
-export const addDialogActionCreator = (dialogText) => ({type: addDialog, dialogText});
+const ADD_DIALOG = "messageReducer/ADD-DIALOG";
+export const addDialog = (dialogText) => ({type: ADD_DIALOG, dialogText});
 
 let initialState = {
     dialogsData: [
@@ -52,7 +52,7 @@ let initialState = {
 const messageReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case "ADD-DIALOG":
+        case ADD_DIALOG:
             let newDialog = {
                 id: 10,
                 message: action.dialogText

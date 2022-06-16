@@ -1,6 +1,7 @@
 import {authMe} from "./auth-reducer";
 
-export const setInitialized = () => ({type: "SET_INITIALIZED"})
+const SET_INITIALIZED = "appReducer/SET_INITIALIZED"
+export const setInitialized = () => ({type: SET_INITIALIZED})
 
 let initialState = {
     initialized: false
@@ -8,7 +9,7 @@ let initialState = {
 
 const appReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "SET_INITIALIZED":
+        case SET_INITIALIZED:
             return {
                 ...state,
                 initialized: true

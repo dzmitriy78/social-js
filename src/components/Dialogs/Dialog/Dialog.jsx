@@ -3,12 +3,12 @@ import classes from "./../Dialogs.module.css"
 import {NavLink} from "react-router-dom";
 
 
-export const Dialog = (props) => {
-    let path = "/dialogs/" + props.id;
+export const Dialog = ({id, name, avatar}) => {
+    let path = "/dialogs/" + id;
     return (
         <div className={classes.dialog}>
             <NavLink className={(DialogsData) => DialogsData.isActive ? classes.active : ""}
-                     to={path}>{props.avatar}{props.name}</NavLink>
+                     to={path}>{avatar}{name}</NavLink>
         </div>
     )
 }
