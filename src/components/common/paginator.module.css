@@ -1,0 +1,19 @@
+.pageWrapper {
+    display: flex;
+}
+
+.page {
+    color: #cbffff;
+    padding: 5px;
+    border: teal 1px solid;
+    cursor: pointer;
+}
+
+.selectedPage {
+
+    font-weight: bold;
+    border: #464d91 2px solid;
+    padding: 5px;
+    cursor: pointer;
+    background-color: #c9b08f;
+}
