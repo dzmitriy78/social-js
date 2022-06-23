@@ -18,8 +18,9 @@ let Users = ({
     return <div className={styles.usersRoot}>
         <Paginator currentPage={currentPage}
                    onPageChanged={onPageChanged}
-                   totalUsersCount={totalUsersCount}
+                   totalItemsCount={totalUsersCount}
                    pageSize={pageSize}
+                   portionSize={10}
         />
         {
             users.map((u, i) => <User key={i}

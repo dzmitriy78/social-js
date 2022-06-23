@@ -1,5 +1,6 @@
 .pageWrapper {
     display: flex;
+    justify-content: center;
 }
 
 .page {
@@ -16,4 +17,11 @@
     padding: 5px;
     cursor: pointer;
     background-color: #c9b08f;
+}
+.btn {
+    cursor: pointer;
+    border: solid 1px white;
+    border-radius: 20px;
+    color: white;
+    background-color: #2187e7;
 }
