@@ -1,9 +1,11 @@
 import React from "react";
 import classes from "./Music.module.css"
-export function Music () {
+
+function Music () {
     return (
         <div>
             Music
         </div>
     )
 }
+export default Music

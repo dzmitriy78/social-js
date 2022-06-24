@@ -10,7 +10,8 @@ let mapStateToProps = (state) => {
     }
 }
 
-export const DialogsContainer = compose(
+const DialogsContainer = compose(
     connect(mapStateToProps, {addDialog} ),
     withAuthRedirect)
 (Dialogs)
+export default DialogsContainer
