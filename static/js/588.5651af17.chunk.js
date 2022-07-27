@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_kabzda_1=self.webpackChunkreact_kabzda_1||[]).push([[588],{1588:function(e,n,t){t.r(n),t.d(n,{default:function(){return r}});t(2791);var a=t(184);var r=function(){return(0,a.jsx)("div",{children:"Settings"})}}}]);
+//# sourceMappingURL=588.5651af17.chunk.js.map
