@@ -5,12 +5,17 @@ import {login} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {Navigate} from "react-router-dom";
 
-const Login = ({isAuth,login}) => {
+const Login = ({isAuth, login}) => {
     if (isAuth) {
         return <Navigate replace to="/profile"/>
     }
     return <div>
         <h1>Login</h1>
+        <h3>
+            Данные тестового аккаунта:<br/>
+            Email: free@samuraijs.com<br/>
+            Password: free
+        </h3>
         {<Formik
             initialValues={{
                 email: "",

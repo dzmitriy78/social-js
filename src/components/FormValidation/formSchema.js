@@ -4,7 +4,7 @@ export const loginFormSchema = Yup.object().shape({
     email: Yup.string()
         .email(),
     password: Yup.string()
-        .min(8, "Must be longer than 8 characters")
+        .min(4, "Must be longer than 8 characters")
         .required("Required")
 })
 export const postFormSchema = Yup.object().shape({
