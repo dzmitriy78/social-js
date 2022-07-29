@@ -1,8 +1,13 @@
 import React from "react";
 import classes from "./ProfileInfo.module.css"
 import ProfileStatus from "./ProfileStatus";
+import UserPhoto from "../../../assets/images/user.png";
 
-export const ProfileInfo = ({profile, status, updateStatus}) => {
+export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+
+    const onPhotoSelected = (e) => {
+        savePhoto(e.target.files[0])
+    }
 
     return (
         <div className={classes.profileInfo}>
@@ -14,12 +19,16 @@ export const ProfileInfo = ({profile, status, updateStatus}) => {
 
             <span className={classes.description}>
                 <img
-                    src={profile.photos.small} alt={"no photo"}/>
+                    src={profile.photos.large || profile.photos.small || UserPhoto}
+                    alt={"no photo"}
+                    className={classes.userPhoto}/>
+                {isOwner && <span>Сменить фото<input type={"file"}
+                                                     onChange={onPhotoSelected}/></span>}
             </span>
             <ProfileStatus status={status}
                            updateStatus={updateStatus}/>
             <div className={classes.description}>
-                <h3>  {"Name:" + " " + profile.fullName}</h3>
+                <h3>  {profile.fullName}</h3>
             </div>
             <div className={classes.description}>
                 {"contacts:" + " " + profile.contacts.vk}

@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Profile} from "./Profile";
-import {getProfile, getStatus, updateStatus} from "../../redux/profile-reducer";
+import {getProfile, getStatus, savePhoto, updateStatus} from "../../redux/profile-reducer";
 import {connect} from "react-redux";
 import {useMatch} from "react-router-dom";
 import {compose} from "redux";
@@ -14,39 +14,33 @@ export const ProfileURLMatch = (Component) => {
     return RouterComponent
 }
 
-class ProfileContainer extends React.Component {
-
-    componentDidMount() {
-        let userId = this.props.match
-            ? this.props.match.params.userId
-            : this.props.meId
+function ProfileContainer({getProfile, getStatus, match, meId, profile, status, updateStatus, savePhoto}) {
+    useEffect(() => {
+        let userId = match ? match.params.userId : meId
         if (userId) {
-            this.props.getProfile(userId)
-            this.props.getStatus(userId)
+            getProfile(userId)
+            getStatus(userId)
         }
-    }
-
-    render() {
-        return (
-            <Profile {...this.props}
-                     profile={this.props.profile}
-                     status={this.props.status}
-                     updateStatus={this.props.updateStatus}
-            />
-        )
-    }
+    }, [match])
+    return (
+        <Profile profile={profile}
+                 status={status}
+                 updateStatus={updateStatus}
+                 isOwner={!match}
+                 savePhoto={savePhoto}
+        />
+    )
 }
 
 let mapStateToProps = (state) => ({
         profile: state.profilePage.profile,
         status: state.profilePage.status,
-        meId: state.auth.userId,
-        isAuth: state.auth.isAuth
+        meId: state.auth.userId
     }
 )
 
 export default compose(
-    connect(mapStateToProps, {getProfile, getStatus, updateStatus}),
+    connect(mapStateToProps, {getProfile, getStatus, updateStatus, savePhoto}),
     ProfileURLMatch,
-    /* withAuthRedirect*/)
+    /*withAuthRedirect*/)
 (ProfileContainer)

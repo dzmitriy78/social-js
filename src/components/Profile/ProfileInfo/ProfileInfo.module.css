@@ -6,3 +6,6 @@
     padding: 10px;
     color: #121958;
 }
+.userPhoto {
+    max-width: 150px;
+}
