@@ -1,16 +1,17 @@
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api"
 
-const ADD_POST = "profileReducer/ADD-POST";
-const SET_USER_PROFILE = "profileReducer/SET_USER_PROFILE";
-const SET_STATUS = "profileReducer/SET_STATUS";
+const ADD_POST = "profileReducer/ADD-POST"
+const SET_USER_PROFILE = "profileReducer/SET_USER_PROFILE"
+const SET_STATUS = "profileReducer/SET_STATUS"
 const DELETE_POST = "profileReducer/DELETE-POST"
-const SET_PHOTO = "SET-PHOTO"
+const SET_PHOTO = "profileReducer/SET-PHOTO"
 
 export const addPostActionCreator = (text) => ({type: ADD_POST, newText: text});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setStatus = (status) => ({type: SET_STATUS, status})
 export const deletePost = (id) => ({type: DELETE_POST, id});
 export const setPhoto = (photos) => ({type: SET_PHOTO, photos})
+
 
 let initialState = {
     postData: [
@@ -91,5 +92,17 @@ export const savePhoto = (file) => {
             })
     }
 }
+export const saveProfile = (profile) => {
+    return (dispatch, getState) => {
+        const userID = getState().auth.userId
+        profileAPI.updateProfile(profile)
+            .then(({data}) => {
+                if (data.resultCode === 0) {
+                    dispatch(getProfile(userID))
+                }
+            })
+    }
+}
+
 
 export default profileReducer;

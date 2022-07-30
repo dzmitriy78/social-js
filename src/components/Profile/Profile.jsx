@@ -2,7 +2,7 @@ import React from "react";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 
-export const Profile = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+export const Profile = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
     if (!profile) {
         return <div>
             <img
@@ -16,7 +16,8 @@ export const Profile = ({profile, status, updateStatus, isOwner, savePhoto}) => 
                          status={status}
                          updateStatus={updateStatus}
                          isOwner={isOwner}
-                         savePhoto={savePhoto}/>
+                         savePhoto={savePhoto}
+                         saveProfile={saveProfile}/>
             <MyPostsContainer/>
         </div>
     )

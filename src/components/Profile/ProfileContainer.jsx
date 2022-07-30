@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {Profile} from "./Profile";
-import {getProfile, getStatus, savePhoto, updateStatus} from "../../redux/profile-reducer";
+import {getProfile, getStatus, savePhoto, saveProfile, updateStatus} from "../../redux/profile-reducer";
 import {connect} from "react-redux";
 import {useMatch} from "react-router-dom";
 import {compose} from "redux";
@@ -14,7 +14,7 @@ export const ProfileURLMatch = (Component) => {
     return RouterComponent
 }
 
-function ProfileContainer({getProfile, getStatus, match, meId, profile, status, updateStatus, savePhoto}) {
+function ProfileContainer({getProfile, getStatus, match, meId, profile, status, updateStatus, savePhoto, saveProfile}) {
     useEffect(() => {
         let userId = match ? match.params.userId : meId
         if (userId) {
@@ -28,6 +28,7 @@ function ProfileContainer({getProfile, getStatus, match, meId, profile, status, 
                  updateStatus={updateStatus}
                  isOwner={!match}
                  savePhoto={savePhoto}
+                 saveProfile={saveProfile}
         />
     )
 }
@@ -40,7 +41,7 @@ let mapStateToProps = (state) => ({
 )
 
 export default compose(
-    connect(mapStateToProps, {getProfile, getStatus, updateStatus, savePhoto}),
+    connect(mapStateToProps, {getProfile, getStatus, updateStatus, savePhoto, saveProfile}),
     ProfileURLMatch,
     /*withAuthRedirect*/)
 (ProfileContainer)
