@@ -12,10 +12,8 @@ const ProfileDataEditingForm = ({profile, saveProfile, disableEditMode}) => {
             AboutMe: profile.aboutMe
         },
         onSubmit: (values) => {
-            alert(JSON.stringify(values))
             saveProfile(values)
             disableEditMode()
-            //formik.resetForm()
         }
     })
 
@@ -29,7 +27,7 @@ const ProfileDataEditingForm = ({profile, saveProfile, disableEditMode}) => {
             </div>
             <div className={classes.description}>
                 <label htmlFor={'lookingForAJob'}> <b>Looking for a job: </b></label>
-                <input type={'checkbox'} name={'lookingForAJob'}/>
+                <input type={'checkbox'} name={'lookingForAJob'} onChange={formik.handleChange}/>
             </div>
             {/* <div className={classes.description}>
                 <b>Looking for a job:</b> {profile.lookingForAJob ? "Yes" : "No"}
