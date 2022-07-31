@@ -1,15 +1,25 @@
-import React, {useState} from "react";
+import React from "react";
 import classes from "./ProfileInfo.module.css"
 import ProfileStatus from "./ProfileStatus";
 import UserPhoto from "../../../assets/images/user.png";
 import ProfileDataEditingForm from "../../Form/ProfileDataEditingForm";
+import {setEditMode, setError} from "../../../redux/profile-reducer";
+import {useDispatch} from "react-redux";
 
-export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile}) => {
+export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, error, editMode}) => {
 
-    const [editMode, setEditMode] = useState(false)
+    const dispatch = useDispatch()
 
     const onPhotoSelected = (e) => {
         savePhoto(e.target.files[0])
+    }
+
+    const enableEditMode = () => {
+        dispatch(setEditMode(true))
+    }
+    const disableEditMode = () => {
+        dispatch(setEditMode(false))
+        dispatch(setError(""))
     }
 
     return (
@@ -30,12 +40,14 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
             </span>
             <ProfileStatus status={status}
                            updateStatus={updateStatus}/>
-            {editMode && <button onClick={() => setEditMode(false)}>Cancel Editing</button>}
+            {editMode && <button onClick={disableEditMode}>Cancel Editing</button>}
             {editMode
-                ? <ProfileDataEditingForm profile={profile} saveProfile={saveProfile}
-                                          disableEditMode={() => setEditMode(false)}/>
-                : <ProfileData profile={profile} goToEditMode={() => setEditMode(true)} isOwner={isOwner}/>}
-
+                ? <ProfileDataEditingForm profile={profile}
+                                          saveProfile={saveProfile}
+                                          error={error}/>
+                : <ProfileData profile={profile}
+                               goToEditMode={enableEditMode}
+                               isOwner={isOwner}/>}
         </div>
     )
 }

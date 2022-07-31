@@ -14,7 +14,19 @@ export const ProfileURLMatch = (Component) => {
     return RouterComponent
 }
 
-function ProfileContainer({getProfile, getStatus, match, meId, profile, status, updateStatus, savePhoto, saveProfile}) {
+function ProfileContainer({
+                              getProfile,
+                              getStatus,
+                              match,
+                              meId,
+                              profile,
+                              status,
+                              updateStatus,
+                              savePhoto,
+                              saveProfile,
+                              error,
+                              editMode
+                          }) {
     useEffect(() => {
         let userId = match ? match.params.userId : meId
         if (userId) {
@@ -29,6 +41,8 @@ function ProfileContainer({getProfile, getStatus, match, meId, profile, status, 
                  isOwner={!match}
                  savePhoto={savePhoto}
                  saveProfile={saveProfile}
+                 error={error}
+                 editMode={editMode}
         />
     )
 }
@@ -36,7 +50,9 @@ function ProfileContainer({getProfile, getStatus, match, meId, profile, status, 
 let mapStateToProps = (state) => ({
         profile: state.profilePage.profile,
         status: state.profilePage.status,
-        meId: state.auth.userId
+        meId: state.auth.userId,
+        error: state.profilePage.error,
+        editMode: state.profilePage.editMode
     }
 )
 

@@ -2,23 +2,23 @@ import React from "react";
 import classes from "../Profile/ProfileInfo/ProfileInfo.module.css";
 import {useFormik} from "formik";
 
-const ProfileDataEditingForm = ({profile, saveProfile, disableEditMode}) => {
+const ProfileDataEditingForm = ({profile, saveProfile, error}) => {
 
     const formik = useFormik({
         initialValues: {
             fullName: profile.fullName,
             lookingForAJob: profile.lookingForAJob,
             lookingForAJobDescription: profile.lookingForAJobDescription,
-            AboutMe: profile.aboutMe
+            AboutMe: profile.aboutMe,
+            contacts: profile.contacts || ""
         },
         onSubmit: (values) => {
             saveProfile(values)
-            disableEditMode()
         }
     })
-
     return (
         <form onSubmit={formik.handleSubmit}>
+            <div style={{color: "red", fontSize: "20px"}}>{error}</div>
             <div className={classes.description}>
                 <label htmlFor={'fullName'}><b>fullName: </b></label>
                 <input type='text'
@@ -27,11 +27,10 @@ const ProfileDataEditingForm = ({profile, saveProfile, disableEditMode}) => {
             </div>
             <div className={classes.description}>
                 <label htmlFor={'lookingForAJob'}> <b>Looking for a job: </b></label>
-                <input type={'checkbox'} name={'lookingForAJob'} onChange={formik.handleChange}/>
+                <input type={'checkbox'} name={'lookingForAJob'} defaultChecked={profile.lookingForAJob}
+                       {...formik.getFieldProps("lookingForAJob")}
+                />
             </div>
-            {/* <div className={classes.description}>
-                <b>Looking for a job:</b> {profile.lookingForAJob ? "Yes" : "No"}
-            </div>*/}
             <div className={classes.description}>
                 <label htmlFor={'lookingForAJobDescription'}> <b>My professional skills: </b></label>
                 <input type='text'
@@ -43,6 +42,18 @@ const ProfileDataEditingForm = ({profile, saveProfile, disableEditMode}) => {
                 <textarea {...formik.getFieldProps("AboutMe")}
                 />
             </div>
+            <div className={classes.description}>
+                <label htmlFor={'contacts'}><b>Contacts</b></label>: {Object.keys(profile.contacts)
+                .map((key, i) => {
+                    return <div key={i}>
+                        <b>{key}: <input type='text'
+                                         {...formik.getFieldProps("contacts." + key)}/>
+                        </b>
+                    </div>
+
+                })}
+            </div>
+
             <button type={'submit'}>Отправить</button>
         </form>
     )

@@ -5,12 +5,16 @@ const SET_USER_PROFILE = "profileReducer/SET_USER_PROFILE"
 const SET_STATUS = "profileReducer/SET_STATUS"
 const DELETE_POST = "profileReducer/DELETE-POST"
 const SET_PHOTO = "profileReducer/SET-PHOTO"
+const SET_ERROR = "profileReducer/SET-ERROR"
+const SET_EDIT_MODE = "profileReducer/SET-EDIT-MODE"
 
 export const addPostActionCreator = (text) => ({type: ADD_POST, newText: text});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 export const setStatus = (status) => ({type: SET_STATUS, status})
 export const deletePost = (id) => ({type: DELETE_POST, id});
 export const setPhoto = (photos) => ({type: SET_PHOTO, photos})
+export const setError = (error) => ({type: SET_ERROR, error})
+export const setEditMode = (editMode) => ({type: SET_EDIT_MODE, editMode})
 
 
 let initialState = {
@@ -20,7 +24,9 @@ let initialState = {
         {id: 3, message: "Hi", likeCount: 1},
     ],
     profile: null,
-    status: ""
+    status: "",
+    error: "",
+    editMode: false
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -52,6 +58,16 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 profile: {...state.profile, photos: action.photos}
+            }
+        case SET_ERROR:
+            return {
+                ...state,
+                error: action.error
+            }
+        case SET_EDIT_MODE:
+            return {
+                ...state,
+                editMode: action.editMode
             }
         default:
             return state
@@ -99,6 +115,9 @@ export const saveProfile = (profile) => {
             .then(({data}) => {
                 if (data.resultCode === 0) {
                     dispatch(getProfile(userID))
+                    dispatch(setEditMode(false))
+                } else {
+                    dispatch(setError(data.messages[0]))
                 }
             })
     }
