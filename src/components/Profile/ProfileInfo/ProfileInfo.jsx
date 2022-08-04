@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import classes from "./ProfileInfo.module.css"
 import ProfileStatus from "./ProfileStatus";
 import UserPhoto from "../../../assets/images/user.png";
@@ -9,6 +9,7 @@ import {useDispatch} from "react-redux";
 export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, error, editMode}) => {
 
     const dispatch = useDispatch()
+    const pickFile = useRef(null)
 
     const onPhotoSelected = (e) => {
         savePhoto(e.target.files[0])
@@ -20,6 +21,10 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
     const disableEditMode = () => {
         dispatch(setEditMode(false))
         dispatch(setError(""))
+    }
+
+    function filePicker() {
+        pickFile.current.click()
     }
 
     return (
@@ -35,11 +40,18 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
                     src={profile.photos.large || profile.photos.small || UserPhoto}
                     alt={"photo"}
                     className={classes.userPhoto}/>
-                {isOwner && <span>Сменить фото<input type={"file"}
-                                                     onChange={onPhotoSelected}/></span>}
+                {isOwner && <div>
+                    <button onClick={filePicker}>Change photo</button>
+                    <input type={"file"}
+                           className={classes.hidden}
+                           onChange={onPhotoSelected}
+                           ref={pickFile}
+                           accept="image/*"/>
+                </div>}
             </span>
             <ProfileStatus status={status}
-                           updateStatus={updateStatus}/>
+                           updateStatus={updateStatus}
+                           isOwner={isOwner}/>
             {editMode && <button onClick={disableEditMode}>Cancel Editing</button>}
             {editMode
                 ? <ProfileDataEditingForm profile={profile}

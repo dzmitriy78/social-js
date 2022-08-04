@@ -3,11 +3,14 @@ import React from 'react';
 class ProfileStatus extends React.Component {
     state = {
         editMode: false,
-        status: this.props.status
+        status: this.props.status,
+        isOwner: this.props.isOwner
     }
 
     activateEditMode = () => {
-        this.setState({editMode: true})
+        if (this.props.isOwner) {
+            this.setState({editMode: true})
+        }
     }
 
     deactivateEditMode = () => {

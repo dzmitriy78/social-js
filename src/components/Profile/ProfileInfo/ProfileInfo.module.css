@@ -6,6 +6,17 @@
     padding: 10px;
     color: #121958;
 }
+
 .userPhoto {
     max-width: 150px;
+}
+
+.hidden {
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    line-height: 0;
+    overflow: hidden;
 }
