@@ -3,9 +3,9 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import {loginFormSchema} from "../FormValidation/formSchema";
 import {login} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
-import {Navigate} from "react-router-dom";
+import {Navigate} from "react-router";
 
-const Login = ({isAuth, login}) => {
+const Login = ({isAuth, login, captchaUrl}) => {
     if (isAuth) {
         return <Navigate replace to="/profile"/>
     }
@@ -20,7 +20,8 @@ const Login = ({isAuth, login}) => {
             initialValues={{
                 email: "",
                 password: "",
-                rememberMe: false
+                rememberMe: false,
+                captcha: ""
             }}
             validate={values => {
                 const errors = {};
@@ -34,7 +35,7 @@ const Login = ({isAuth, login}) => {
                 return errors;
             }}
             onSubmit={(values, {setStatus}) => {
-                login(values.email, values.password, values.rememberMe, setStatus)
+                login(values.email, values.password, values.rememberMe, values.captcha, setStatus)
             }}
             validationSchema={loginFormSchema}>
             {({status}) => (
@@ -52,6 +53,10 @@ const Login = ({isAuth, login}) => {
                         <label htmlFor={'rememberMe'}> remember me </label>
                     </div>
                     <div style={{color: "red"}}>{status}</div>
+                    <div>
+                        {captchaUrl && <img  src={captchaUrl} alt={"captcha"}/>}
+                        {captchaUrl && <Field type={'text'} name={'captcha'} placeholder={'insert symbols from image'}/>}
+                    </div>
                     <button type={'submit'}>Log in</button>
                 </Form>
             )}
@@ -61,7 +66,8 @@ const Login = ({isAuth, login}) => {
 }
 
 const mapStateToProps = (state) => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captchaUrl: state.auth.captchaUrl
 })
 
 export default connect(mapStateToProps, {login})(Login);
