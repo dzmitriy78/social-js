@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {Profile} from "./Profile";
 import {getProfile, getStatus, savePhoto, saveProfile, updateStatus} from "../../redux/profile-reducer";
 import {connect} from "react-redux";
-import {useMatch} from "react-router-dom";
+import {useMatch} from "react-router";
 import {compose} from "redux";
 
 export const ProfileURLMatch = (Component) => {
@@ -25,8 +25,10 @@ function ProfileContainer({
                               savePhoto,
                               saveProfile,
                               error,
-                              editMode
+                              editMode,
+                              isAuth
                           }) {
+
     useEffect(() => {
         let userId = match ? match.params.userId : meId
         if (userId) {
@@ -43,6 +45,7 @@ function ProfileContainer({
                  saveProfile={saveProfile}
                  error={error}
                  editMode={editMode}
+                 isAuth={isAuth}
         />
     )
 }
@@ -52,7 +55,8 @@ let mapStateToProps = (state) => ({
         status: state.profilePage.status,
         meId: state.auth.userId,
         error: state.profilePage.error,
-        editMode: state.profilePage.editMode
+        editMode: state.profilePage.editMode,
+        isAuth: state.auth.isAuth
     }
 )
 

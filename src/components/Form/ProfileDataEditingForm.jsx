@@ -20,7 +20,7 @@ const ProfileDataEditingForm = ({profile, saveProfile, error}) => {
         <form onSubmit={formik.handleSubmit}>
             <div style={{color: "red", fontSize: "20px"}}>{error}</div>
             <div className={classes.description}>
-                <label htmlFor={'fullName'}><b>fullName: </b></label>
+                <label htmlFor={'fullName'}><b>Full Name: </b></label>
                 <input type='text'
                        {...formik.getFieldProps("fullName")}
                 />

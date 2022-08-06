@@ -4,7 +4,7 @@ import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-teal/theme.css';
 import 'primereact/resources/primereact.css';
 
-export const ProgressBarDemo = () => {
+export const ProgressBarUnit = () => {
 
     return <div>
         <div className="card">

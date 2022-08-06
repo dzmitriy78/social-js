@@ -5,8 +5,9 @@ import {Navbar} from './components/Navbar/Navbar';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
-import {ProgressBarDemo} from "./components/common/Preloader/ProgressBar";
+import {ProgressBarUnit} from "./components/common/Preloader/ProgressBarUnit";
 import ErrorBoundary from "./components/common/MyErrorBoundary"
+import {Navigate} from "react-router";
 
 const Music = React.lazy(() => import("./components/Music/Music"));
 const Settings = React.lazy(() => import("./components/Settings/Settings"));
@@ -24,19 +25,20 @@ const App = ({initializeApp, initialized}) => {
     if (!initialized) {
         return <>
             <div className={"initial"}>
-                Инициализация
+                Initialization
             </div>
-            <ProgressBarDemo/>
+            <ProgressBarUnit/>
         </>
     }
     return (
         <div className='app-wrapper'>
             <ErrorBoundary>
-                <Suspense fallback={<div>Загрузка...</div>}>
+                <Suspense fallback={<div>Loading...</div>}>
                     <HeaderContainer/>
                     <Navbar/>
                     <div className={"app-wrapper-content"}>
                         <Routes>
+                            <Route exact path="/" element={<Navigate to={'/profile'}/>}/>
                             <Route path="/dialogs/*" element={<DialogsContainer/>}/>
                             <Route path='/profile/*' element={<ProfileContainer/>}/>
                             <Route path='/users/*' element={<UsersContainer/>}/>
@@ -44,6 +46,11 @@ const App = ({initializeApp, initialized}) => {
                             <Route path='/music/*' element={<Music/>}/>
                             <Route path="/settings/*" element={<Settings/>}/>
                             <Route path="/login/*" element={<Login/>}/>
+                            <Route path="*" element={
+                                <div style={{fontSize: 60}}>
+                                    Oops! Page not found!
+                                </div>
+                            }/>
                         </Routes>
                     </div>
                 </Suspense>

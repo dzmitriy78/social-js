@@ -4,11 +4,12 @@ class ProfileStatus extends React.Component {
     state = {
         editMode: false,
         status: this.props.status,
-        isOwner: this.props.isOwner
+        isOwner: this.props.isOwner,
+        isAuth: this.props.isAuth
     }
 
     activateEditMode = () => {
-        if (this.props.isOwner) {
+        if (this.props.isAuth && this.props.isOwner) {
             this.setState({editMode: true})
         }
     }

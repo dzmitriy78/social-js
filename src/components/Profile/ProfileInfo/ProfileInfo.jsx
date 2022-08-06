@@ -5,8 +5,19 @@ import UserPhoto from "../../../assets/images/user.png";
 import ProfileDataEditingForm from "../../Form/ProfileDataEditingForm";
 import {setEditMode, setError} from "../../../redux/profile-reducer";
 import {useDispatch} from "react-redux";
+import {ProfileData} from "./ProfileData";
 
-export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, saveProfile, error, editMode}) => {
+export const ProfileInfo = ({
+                                profile,
+                                status,
+                                updateStatus,
+                                isOwner,
+                                savePhoto,
+                                saveProfile,
+                                error,
+                                editMode,
+                                isAuth
+                            }) => {
 
     const dispatch = useDispatch()
     const pickFile = useRef(null)
@@ -29,10 +40,10 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
 
     return (
         <div className={classes.profileInfo}>
-            {<div>
+            {!profile && <div>
                 <img
                     src="https://cdn-prod.medicalnewstoday.com/content/images/articles/325/325466/man-walking-dog.jpg"
-                    alt={"profileImg"}/>
+                    alt={"rootImg"}/>
             </div>}
 
             <span className={classes.description}>
@@ -40,7 +51,7 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
                     src={profile.photos.large || profile.photos.small || UserPhoto}
                     alt={"photo"}
                     className={classes.userPhoto}/>
-                {isOwner && <div>
+                {isAuth && isOwner && <div>
                     <button onClick={filePicker}>Change photo</button>
                     <input type={"file"}
                            className={classes.hidden}
@@ -51,41 +62,17 @@ export const ProfileInfo = ({profile, status, updateStatus, isOwner, savePhoto, 
             </span>
             <ProfileStatus status={status}
                            updateStatus={updateStatus}
-                           isOwner={isOwner}/>
-            {editMode && <button onClick={disableEditMode}>Cancel Editing</button>}
-            {editMode
+                           isOwner={isOwner}
+                           isAuth={isAuth}/>
+            {isAuth && isOwner && editMode && <button onClick={disableEditMode}>Cancel Editing</button>}
+            {isAuth && isOwner && editMode
                 ? <ProfileDataEditingForm profile={profile}
                                           saveProfile={saveProfile}
                                           error={error}/>
                 : <ProfileData profile={profile}
                                goToEditMode={enableEditMode}
-                               isOwner={isOwner}/>}
-        </div>
-    )
-}
-
-const ProfileData = ({profile, isOwner, goToEditMode}) => {
-    return (
-        <div>
-            {isOwner && <button onClick={goToEditMode}>Edit Profile</button>}
-            <div className={classes.description}>
-                <h3>  {profile.fullName}</h3>
-            </div>
-            <div className={classes.description}>
-                <b>Looking for a job:</b> {profile.lookingForAJob ? "Yes" : "No"}
-            </div>
-            <div className={classes.description}>
-                <b>My professional skills:</b> {profile.lookingForAJobDescription}
-            </div>
-            <div className={classes.description}>
-                <b>AboutMe:</b> {profile.aboutMe}
-            </div>
-            <div className={classes.description}>
-                <b>Contacts</b>: {Object.keys(profile.contacts)
-                .map(key => {
-                    return <Contact key={key} title={key} value={profile.contacts[key]}/>
-                })}
-            </div>
+                               isOwner={isOwner}
+                               isAuth={isAuth}/>}
         </div>
     )
 }
