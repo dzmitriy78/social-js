@@ -5,7 +5,7 @@
     grid-template-columns: 2fr 7fr;
 }
 
-.dialogs dialogsItems {
+.dialogs .dialogsItems {
     text-decoration: none;
 }
 

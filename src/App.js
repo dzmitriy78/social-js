@@ -16,6 +16,7 @@ const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileCo
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
 const Login = React.lazy(() => import( "./components/Login/Login"));
 const News = React.lazy(() => import ("./components/News/News"));
+const Chat = React.lazy(() => import ("./components/Chat/Chat"));
 
 const App = ({initializeApp, initialized}) => {
 
@@ -42,6 +43,7 @@ const App = ({initializeApp, initialized}) => {
                             <Route path="/dialogs/*" element={<DialogsContainer/>}/>
                             <Route path='/profile/*' element={<ProfileContainer/>}/>
                             <Route path='/users/*' element={<UsersContainer/>}/>
+                            <Route path='/chat/*' element={<Chat/>}/>
                             <Route path="/news/*" element={<News/>}/>
                             <Route path='/music/*' element={<Music/>}/>
                             <Route path="/settings/*" element={<Settings/>}/>

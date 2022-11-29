@@ -15,6 +15,9 @@ export const Navbar = ()=> {
                 <NavLink className={(navData) =>navData.isActive ? classes.activeLink : ""} to ={"/users"} >Users</NavLink>
             </div>
             <div className={classes.item}>
+                <NavLink className={(navData) =>navData.isActive ? classes.activeLink : ""} to ={"/chat"} >Chat</NavLink>
+            </div>
+            <div className={classes.item}>
                 <NavLink className={(navData) =>navData.isActive ? classes.activeLink : ""} to ={"/news"} >News</NavLink>
             </div>
             <div className={classes.item}>
