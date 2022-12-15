@@ -1,4 +1,5 @@
 import React from "react";
+import {v1} from "uuid";
 
 const ADD_DIALOG = "messageReducer/ADD-DIALOG";
 export const addDialog = (dialogText) => ({type: ADD_DIALOG, dialogText});
@@ -54,7 +55,7 @@ const messageReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_DIALOG:
             let newDialog = {
-                id: 10,
+                id: v1(),
                 message: action.dialogText
             }
             return {
